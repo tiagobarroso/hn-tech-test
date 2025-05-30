@@ -7,7 +7,7 @@ This is a tech test where the goal is to create a text summarizer using AI.
 On the project root folder, create a .env file with the following content:
 
 ```
-MONGODB_URI=mongodb://localhost:27018/snippet-ai
+MONGODB_URI=mongodb://mongo:27018/snippet-ai
 MONGODB_URI_TEST=mongodb://mongo:27017/snippet-ai-test
 
 OPENAI_API_KEY=[get from Open Ai api portal]
