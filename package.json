@@ -4,6 +4,8 @@
   "description": "This is a sample test ptoject to help create snippets from bigger texts",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
     "test": "jest"
   },
   "author": "",
