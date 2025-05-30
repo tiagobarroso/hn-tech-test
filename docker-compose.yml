@@ -1,7 +1,8 @@
 version: "3.8"
 services:
   api:
-    build: .
+    build: 
+      context: .
     ports:
       - "3000:3000"
     environment:
@@ -11,6 +12,18 @@ services:
     depends_on:
       - mongo
     entrypoint: ["sh", "entrypoint.sh"]
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3030:3030"
+    depends_on:
+      - api
+    # For development, you could use:
+    # command: npm start
+    # volumes:
+    #   - ./frontend:/app
 
   mongo:
     image: mongo:6
