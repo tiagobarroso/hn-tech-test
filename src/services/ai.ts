@@ -1,1 +1,4 @@
-// add here the the open api implementation
+
+export const getSnippetFromText = (text: string) => {
+
+} 
