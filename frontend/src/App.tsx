@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import * as snippetService from "./services/snippet";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [textAreText, setTextAreaText] = useState("");
+    const [snippetResultList, setSnippetResultList] = useState<any[]>([]);
+
+    const getSummary = async (text: string) => {
+
+        debugger;
+        let newSnippetReq = await snippetService.getSummary(text);
+
+        let newSnippet = await newSnippetReq.json();
+        setSnippetResultList((current) => current.concat([newSnippet]));
+
+        setTextAreaText('');
+    };
+
+    return (
+        <div className="container">
+            <div className="historyContainer">
+                {snippetResultList.map((s) => (
+                    <div className="historyCard">
+                        <div>{s.summary}</div>
+                        <div>{s.text}</div>
+                    </div>                    
+                ))}
+            </div>
+            <div className="inputContainer">
+                <div className="textAreaContainer">
+                    <textarea
+                        value={textAreText || ""}
+                        onChange={(e) => setTextAreaText(e.target.value)}
+                    ></textarea>
+                </div>
+                <div className="buttonContainer">
+                    <button onClick={() => getSummary(textAreText)}>GET SNIPPET</button>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default App;
